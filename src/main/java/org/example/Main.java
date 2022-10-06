@@ -21,6 +21,10 @@ public class Main {
     static WebElement Password;
     static WebElement RePassword;
     static WebElement SignUpButton;
+    static WebElement LoginButton1;
+    static WebElement EnglishButton;
+    static WebElement ArabicButton;
+    static WebElement ContactUsButton;
 
     static String CurrentUrl;
 
@@ -52,7 +56,7 @@ public class Main {
         PhoneNumber=driver.findElement(By.xpath("//input[@name='mobile_number']"));
         PhoneNumber.sendKeys("01288890222");
         Email = driver.findElement(By.xpath("//input[@type='email']"));
-        Email.sendKeys("z@xcve.com");
+        Email.sendKeys("z@xcvdddde.com");
         Password = driver.findElement(By.xpath("//input[@name='password']"));
         Password.sendKeys("Zz@123456");
         Thread.sleep(2000);
@@ -71,6 +75,31 @@ public class Main {
         CurrentUrl = driver.getCurrentUrl();
         Assert.assertEquals(CurrentUrl,"https://merchant.kashier.io/en/dashboard");
     }
+
+    @Test(priority = 2)
+    public static void LoginButton()
+    {
+        LoginButton1=driver.findElement(By.xpath("//a[@class='m-link m-login__account-link']"));
+        LoginButton1.click();
+        Assert.assertEquals("https://merchant.kashier.io/en/login",driver.getCurrentUrl());
+    }
+
+    @Test(priority = 3)
+    public static void EnglishModeButton() throws InterruptedException {
+        EnglishButton = driver.findElement(By.xpath("//a[@class='padding-change-language-en']"));
+        EnglishButton.click();
+        Thread.sleep(2000);
+        Assert.assertEquals("https://merchant.kashier.io/en/signup",driver.getCurrentUrl());
+    }
+
+    @Test(priority = 3)
+    public static void ArabicModeButton() throws InterruptedException {
+        ArabicButton = driver.findElement(By.xpath("//a[@class='padding-change-language-ar']"));
+        ArabicButton.click();
+        Thread.sleep(2000);
+        Assert.assertEquals("https://merchant.kashier.io/ar/signup",driver.getCurrentUrl());
+    }
+
 
     @AfterMethod
     public static void TearDown()
